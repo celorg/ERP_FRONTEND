@@ -14,6 +14,19 @@ const Loader = (Component) => (props) =>
     </Suspense>
   );
 
+// Auth
+const SignIn = Loader(lazy(() => import('src/content/pages/Auth/SignIn')));
+
+// Groups
+const Groups = Loader(lazy(() => import('src/content/pages/Groups/Groups')));
+const AddGroup = Loader(lazy(() => import('src/content/pages/Groups/Add')));
+const EditGroup = Loader(lazy(() => import('src/content/pages/Groups/Edit')));
+
+// Employees
+const Employees = Loader(lazy(() => import('src/content/pages/Employees/Employees')));
+const AddEmployee = Loader(lazy(() => import('src/content/pages/Employees/Add')));
+const EditEmployyee = Loader(lazy(() => import('src/content/pages/Employees/Edit')));
+
 // Pages
 
 const Overview = Loader(lazy(() => import('src/content/overview')));
@@ -81,6 +94,51 @@ const routes: RouteObject[] = [
     path: '',
     element: <BaseLayout />,
     children: [
+      {
+        path: '/signin',
+        element: <SignIn />
+      },
+
+      // Groups
+      {
+        path: '/',
+        element: <SidebarLayout />,
+        children: [
+          {
+            path: 'groups',
+            element: <Groups />
+          },
+          {
+            path: 'groups-add',
+            element: <AddGroup />
+          },
+          {
+            path: 'groups/edit/:id',
+            element: <EditGroup />
+          },
+        ]
+      },
+
+      // Employees
+      {
+        path: '',
+        element: <SidebarLayout />,
+        children: [
+          {
+            path: 'employees',
+            element: <Employees />
+          },
+          {
+            path: 'employees-add',
+            element: <AddEmployee />
+          },
+          {
+            path: 'employees/edit/:id',
+            element: <EditEmployyee />
+          }
+        ]
+      },
+
       {
         path: '/',
         element: <Overview />
